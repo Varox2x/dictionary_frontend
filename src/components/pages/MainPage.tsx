@@ -1,12 +1,15 @@
 import React from 'react'
+import PageWrapper from '../wrappers/PageWrapper';
 
 type Props = {
-    
+
 };
 
 const MainPage: React.FC<Props> = () => {
   return (
-    <div>MainPage</div>
+    <PageWrapper>
+        Main Page
+    </PageWrapper>
   )
 }
 
