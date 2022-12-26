@@ -4,12 +4,13 @@ import {
 	useMutation,
 	useQueryClient,
 	UseQueryResult,
+	UseMutationResult,
 } from "react-query";
 import dictionary from "../../services/dictionary";
 import { IWord } from "../../helpers/interfaces";
 
 type Props = {
-	setName: string;
+	setName: any;
 };
 
 const Edit: React.FC<Props> = ({ setName }) => {
@@ -21,7 +22,7 @@ const Edit: React.FC<Props> = ({ setName }) => {
 		setName: setName,
 	});
 
-	const mutation = useMutation({
+	const mutation: UseMutationResult<IWord> = useMutation({
 		mutationFn: dictionary.createWord,
 		onSuccess: (dataResp) => {
 			queryClient.setQueryData(["sets", `${setName}`], (oldData: any) =>
