@@ -24,9 +24,9 @@ const LoginPage: React.FC<Props> = () => {
 		e.preventDefault();
 		authentication.login(loginInfo).then((r: any) => {
 			if (r.status == 200) {
-				navigate("/");
+				navigate("/dictionary");
 			}
-            // else generate global error
+			// else generate global error
 		});
 	};
 

@@ -9,7 +9,7 @@ export const routes = (
 	<Routes>
 		<Route
 			key={`/`}
-			path={"/"}
+			path={"/dictionary"}
 			element={<RouteWrapper children={<MainPage />} />}
 		/>
 		{routerList.map(({ path, component }) => {

@@ -1,6 +1,6 @@
 const RoutesPaths = {
 	MainPage: {
-		path: "/:id",
+		path: "/dictionary/:id",
 		route: () => "/",
 	},
 	LoginPage: {
