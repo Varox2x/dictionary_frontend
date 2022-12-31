@@ -24,10 +24,12 @@ const Edit: React.FC<Props> = ({ setName }) => {
 
 	const mutation: UseMutationResult<IWord> = useMutation({
 		mutationFn: dictionary.createWord,
-		onSuccess: (dataResp) => {
-			queryClient.setQueryData(["sets", `${setName}`], (oldData: any) =>
-				oldData ? [...oldData, { ...createdWord }] : oldData
-			);
+		onSuccess: (dataResp: any) => {
+			if (dataResp.status == 200) {
+				queryClient.setQueryData(["sets", `${setName}`], (oldData: any) =>
+					oldData ? [...oldData, { ...createdWord }] : oldData
+				);
+			}
 		},
 	});
 
