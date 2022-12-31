@@ -16,14 +16,16 @@ const ModalInput: React.FC<Props> = ({ showModal, setShowModal }) => {
 
 	const mutation = useMutation({
 		mutationFn: () => dictionary.createSet(setName),
-		onSuccess: (dataResp) => {
-			queryClient.setQueryData(["setsNames"], (oldData: any) => {
-				if (oldData) {
-					let data = { ...oldData };
-					data.sets.rows.push(setName);
-					return data;
-				}
-			});
+		onSuccess: (dataResp: any) => {
+			if (dataResp.status == 200) {
+				queryClient.setQueryData(["setsNames"], (oldData: any) => {
+					if (oldData) {
+						let data = { ...oldData };
+						data.sets.rows.push(setName);
+						return data;
+					}
+				});
+			}
 		},
 	});
 

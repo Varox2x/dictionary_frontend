@@ -69,7 +69,8 @@ const createSet = async (setName: string) => {
 			if (r.status === 401) {
 				window.location.replace(`login`);
 			}
-			return r.json();
+			// return r.json();
+			return r;
 		})
 		.catch((error) => {
 			return { error: true, errorContent: error };
