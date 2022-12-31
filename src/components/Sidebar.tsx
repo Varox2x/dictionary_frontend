@@ -3,6 +3,7 @@ import { useQuery, UseQueryResult } from "react-query";
 import dictionary from "../services/dictionary";
 import { Mode } from "./../enums";
 import { useNavigate, useSearchParams } from "react-router-dom";
+import { IData } from "../helpers/interfaces";
 
 type ModeType = typeof Mode[keyof typeof Mode];
 
@@ -13,14 +14,6 @@ type Props = {
 	setShowModal: (e: boolean) => void;
 	showModal: boolean;
 };
-
-interface IData {
-	username: string;
-	sets: {
-		count: number;
-		rows: string[];
-	};
-}
 
 const Sidebar: React.FC<Props> = ({
 	mode,
