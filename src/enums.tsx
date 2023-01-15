@@ -4,3 +4,9 @@ export const Mode = {
 	SETTINGS: "Ustawienia",
 	NEWSET: "Dodaj nowy +",
 };
+
+export const PERMISSIONS = {
+	OWNER: "OWNER",
+	EDITABLE: "EDITABLE",
+	FOLLOWE: "FOLLOWER",
+};

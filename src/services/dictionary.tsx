@@ -18,7 +18,7 @@ const getSets = async () => {
 			return { error: true, errorContent: error };
 		});
 };
-
+//przy daj throw error (przy onSucces nie przejdzie)
 const createWord: any = async (body: any) => {
 	const requestOptions: any = {
 		method: "POST",
