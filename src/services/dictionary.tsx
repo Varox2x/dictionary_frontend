@@ -11,7 +11,6 @@ const getOwnedSets = async () => {
 		requestOptions
 	)
 		.then((r) => {
-			console.log(r.status);
 			if (r.status === 401) {
 				window.location.replace(`login`);
 			}
@@ -32,7 +31,6 @@ const createWord: any = async (body: any) => {
 	};
 	return fetch(`${config.apiUrl}/dictionary/word`, requestOptions)
 		.then((r) => {
-			console.log(r.status);
 			if (r.status === 401) {
 				window.location.replace(`login`);
 			}
@@ -51,7 +49,6 @@ const getWords = async (setName: string) => {
 	};
 	return fetch(`${config.apiUrl}/dictionary/set/${setName}`, requestOptions)
 		.then((r) => {
-			console.log(r);
 			if (r.status === 401) {
 				window.location.replace(`login`);
 			}
