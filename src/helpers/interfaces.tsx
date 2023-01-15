@@ -1,15 +1,12 @@
 export interface IWord {
-    name: string;
-    definition: string;
+    name?: string;
+    definition?: string;
     lvl?: number;
     id?: number;
-    setName?: string;
   }
 
- export interface IData {
-    username: string;
-    sets: {
-      count: number;
-      rows: string[];
-    };
-  }
+export interface ISet {
+  name: string;
+  id: number;
+}
+

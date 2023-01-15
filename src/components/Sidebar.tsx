@@ -2,8 +2,8 @@ import React from "react";
 import { useQuery, UseQueryResult } from "react-query";
 import dictionary from "../services/dictionary";
 import { Mode } from "./../enums";
-import { useNavigate, useSearchParams } from "react-router-dom";
-import { IData } from "../helpers/interfaces";
+import { useSearchParams } from "react-router-dom";
+import { ISet } from "../helpers/interfaces";
 
 type ModeType = typeof Mode[keyof typeof Mode];
 
@@ -21,12 +21,11 @@ const Sidebar: React.FC<Props> = ({
 	setShowModal,
 	showModal,
 }) => {
-	const navigate = useNavigate();
 	const [searchParams, setSearchParams] = useSearchParams();
-	const { status, error, data }: UseQueryResult<IData, Error> = useQuery<
-		IData,
+	const { status, error, data }: UseQueryResult<ISet[], Error> = useQuery<
+		ISet[],
 		Error
-	>(["setsNames"], dictionary.getSets, {
+	>(["ownedSets"], dictionary.getOwnedSets, {
 		staleTime: 99999,
 	});
 	return (
@@ -36,15 +35,15 @@ const Sidebar: React.FC<Props> = ({
 				<>
 					<ul>
 						<li onClick={() => setShowModal(!showModal)}>New Set +</li>
-						{data.sets.rows.map((setName, index) => {
+						{data.map((setName, index) => {
 							return (
 								<li
 									key={index}
 									onClick={() => {
 										setMode(Mode.LEARN);
-										setSearchParams({ username: data.username, set: setName });
+										setSearchParams({ setId: `${setName.id}` });
 									}}>
-									<p key={index}>{setName}</p>
+									<p key={index}>{setName.name}</p>
 								</li>
 							);
 						})}

@@ -1,12 +1,15 @@
 import config from "../config";
-
-const getSets = async () => {
+import { PERMISSIONS } from "../enums";
+const getOwnedSets = async () => {
 	const requestOptions: any = {
 		method: "GET",
 		headers: { "Content-Type": "application/json" },
 		credentials: "include",
 	};
-	return fetch(`${config.apiUrl}/dictionary/set/?page=0`, requestOptions)
+	return fetch(
+		`${config.apiUrl}/dictionary/set/permissions/${PERMISSIONS.OWNER}`,
+		requestOptions
+	)
 		.then((r) => {
 			console.log(r.status);
 			if (r.status === 401) {
@@ -18,6 +21,7 @@ const getSets = async () => {
 			return { error: true, errorContent: error };
 		});
 };
+
 //przy daj throw error (przy onSucces nie przejdzie)
 const createWord: any = async (body: any) => {
 	const requestOptions: any = {
@@ -77,4 +81,4 @@ const createSet = async (setName: string) => {
 		});
 };
 
-export default { getSets, createWord, getWords, createSet };
+export default { getOwnedSets, createWord, getWords, createSet };

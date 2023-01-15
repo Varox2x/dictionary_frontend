@@ -9,21 +9,21 @@ import { IWord } from "../../helpers/interfaces";
 import dictionary from "../../services/dictionary";
 
 type Props = {
-	setName: any;
+	setId: any;
 };
 
-const Learn: React.FC<Props> = ({ setName }) => {
+const Learn: React.FC<Props> = ({ setId }) => {
 	const { status, error, data }: UseQueryResult<IWord[], Error> = useQuery<
 		IWord[],
 		Error
-	>(["sets", setName], () => dictionary.getWords(setName), {
+	>(["sets", setId], () => dictionary.getWords(setId), {
 		cacheTime: 99999,
 		staleTime: 99999,
 	});
 
 	return (
 		<div>
-			<h1>Learn {setName}</h1>
+			<h1>Learn {setId}</h1>
 			{status === "success" && (
 				<ul>
 					{data.map(({ name, definition, lvl }: IWord, index: number) => {

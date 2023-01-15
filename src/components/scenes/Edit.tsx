@@ -10,23 +10,22 @@ import dictionary from "../../services/dictionary";
 import { IWord } from "../../helpers/interfaces";
 
 type Props = {
-	setName: any;
+	setId: any;
 };
 
-const Edit: React.FC<Props> = ({ setName }) => {
+const Edit: React.FC<Props> = ({ setId }) => {
 	const queryClient = useQueryClient();
 
 	const [createdWord, setCreatedWord] = useState<IWord>({
 		name: "",
 		definition: "",
-		setName: setName,
 	});
 
 	const mutation: UseMutationResult<IWord> = useMutation({
 		mutationFn: dictionary.createWord,
 		onSuccess: (dataResp: any) => {
 			if (dataResp.status == 200) {
-				queryClient.setQueryData(["sets", `${setName}`], (oldData: any) =>
+				queryClient.setQueryData(["sets", `${setId}`], (oldData: any) =>
 					oldData ? [...oldData, { ...createdWord }] : oldData
 				);
 			}
@@ -36,7 +35,7 @@ const Edit: React.FC<Props> = ({ setName }) => {
 	const { status, error, data }: UseQueryResult<IWord[], Error> = useQuery<
 		IWord[],
 		Error
-	>(["sets", setName], () => dictionary.getWords(setName), {
+	>(["sets", setId], () => dictionary.getWords(setId), {
 		cacheTime: 99999,
 		staleTime: 99999,
 	});
@@ -47,12 +46,12 @@ const Edit: React.FC<Props> = ({ setName }) => {
 
 	const addWord = (e: any) => {
 		e.preventDefault();
-		mutation.mutate(createdWord);
+		mutation.mutate({ ...createdWord, set_id: setId });
 	};
 
 	return (
 		<>
-			<h1>Edit - {setName}</h1>
+			<h1>Edit - {setId}</h1>
 			<div>
 				<form>
 					<p>Add word to set:</p>
